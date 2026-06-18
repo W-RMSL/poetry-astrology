@@ -41,10 +41,11 @@ const sidePieData = {
 
 //小的环形图色彩范围
 const colorList = {
-    '星为主题': ['#B2DDF8', '#8EADC0', '#556E7D', '#3A5565', '#3A474F'],
-    '星为元素': ['#4059B3', '#2C45A0', '#1C3694', '#152970', '#121729'],
-    '星为原型意象': ['#7BA0CA', '#5D87B8', '#58728F', '#415368', '#2A3541'],
-    '星为代语': ['#1F25A6', '#151A95', '#161A6D', '#090E6C', '#0A0D53']
+    // 每个环按一个色系，前 4 项（具体星宿）明亮可区分，第 5 项"其他"用暗色弱化
+    '星为主题': ['#C8F2FF', '#7FE0FF', '#4ADDFF', '#2E9FD6', '#1E3A66'],
+    '星为元素': ['#FFE6A8', '#FFD27A', '#F4B14E', '#C77F2E', '#5A4A2E'],
+    '星为原型意象': ['#BFD4FF', '#7FA8F5', '#4A78E0', '#2C4FB0', '#1E2A66'],
+    '星为代语': ['#E0C8FF', '#B98FF0', '#8E5FD6', '#5E3AA6', '#2E2566']
 }
 
 
@@ -70,18 +71,37 @@ function drawCenterPieChart() {
                 selectedMode: true,
                 startAngle: 168,
                 emphasis: {
+                    scale: true,
+                    scaleSize: 8,
                     itemStyle: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        borderColor: '#FFD27A',
+                        borderWidth: 2,
+                        shadowBlur: 28,
+                        shadowColor: 'rgba(255, 210, 122, 0.6)'
+                    },
+                    label: {
+                        color: '#fff',
+                        fontSize: 15,
+                        fontWeight: 'bold'
                     }
                 },
-                color: ['#1F24A6', '#4059B3', '#7BA0CA', '#B2DDF8'],
+                // 四个切片与各自连线指向的环形图同色系（紫=代语 金=元素 蓝=原型意象 青=主题）
+                color: ['#B98FF0', '#FFD27A', '#7FA8F5', '#4ADDFF'],
+                itemStyle: {
+                    borderColor: '#0A1A33',
+                    borderWidth: 2,
+                    borderRadius: 4,
+                    shadowBlur: 16,
+                    shadowColor: 'rgba(123, 160, 255, 0.3)'
+                },
                 label: {
                     color: "#fff",
-                    fontSize: 12,
+                    fontSize: 13,
+                    fontWeight: 'bold',
                     fontFamily: 'SongTi-regular',
-                    position: 'inside'
+                    position: 'inside',
+                    textBorderColor: 'rgba(10, 26, 51, 0.85)',
+                    textBorderWidth: 3
                 },
                 select: {
                     label: {
@@ -97,7 +117,7 @@ function drawCenterPieChart() {
                         length2: 15,
                         lineStyle: {
 
-                            color: "#fff",
+                            color: "#C8F2FF",
                             maxSurfaceAngle: 80
                         }
                     },
@@ -193,6 +213,11 @@ function drawSidePieChart(chartName) {
                 selectedMode: true,
                 selectedOffset: 0,
                 color: colorList[chartName],
+                itemStyle: {
+                    borderColor: '#0A1A33',
+                    borderWidth: 2,
+                    borderRadius: 3
+                },
                 label: {
                     show: false,
                 },
@@ -200,9 +225,12 @@ function drawSidePieChart(chartName) {
                     label: {
                         show: false,
                     },
+                    scaleSize: 6,
                     itemStyle: {
-                        borderColor: '#fff',
-                        borderWidth: 1
+                        borderColor: '#FFD27A',
+                        borderWidth: 2,
+                        shadowBlur: 16,
+                        shadowColor: 'rgba(255, 210, 122, 0.55)'
                     }
                 },
                 labelLine: {

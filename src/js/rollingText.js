@@ -184,21 +184,10 @@ function drawRollingDiv() {
             spanEle.innerText = letter
             let r = (360 / otherName.length) * j
             spanEle.style.transform = `rotate(${r}deg)`
-            spanEle.style.animation = `rotateAnimation-${i}-${j} 20s linear infinite`;
-
-            // Define dynamic keyframes for each span
-            let dynamicKeyframes = `@keyframes rotateAnimation-${i}-${j} {
-                0% {
-                    transform: rotate(${r}deg);
-                }
-                100% {
-                    transform: rotate(${r + 360}deg);
-                }
-            }`;
-            // Create a style element and append the dynamic keyframes
-            let styleElem = document.createElement("style");
-            styleElem.innerHTML = dynamicKeyframes;
-            document.head.appendChild(styleElem);
+            // 旋转改由父级 .rolling-item 的单条 CSS 动画统一驱动：
+            // 原先每个字符各自注入一个 <style> 和一条无限 @keyframes 动画，
+            // 共 1282 个 style 节点 + 1282 条动画同时运行，是滚动卡顿的主因。
+            // 字符保持各自的静态起始角度 rotate(r)，随父级一起匀速旋转，视觉效果不变。
             innerDiv.appendChild(spanEle)
         }
         let centerText = document.createElement("div")
