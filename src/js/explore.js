@@ -69,7 +69,7 @@ function getColorByEmotion(poetry) {
 
 function getEncodeSvg(poetry) {
     encodeStarElementList = []
-    drawEmotionSvg(poetry)
+    drawEmotionSvg(poetry, true)
     drawGenreSvg(poetry)
     drawMethodSvg(poetry)
     drawStarNameSvg(poetry)
@@ -100,14 +100,15 @@ function getSimpleEncodeSvg(poetry) {
     });
     return svgElement;
 }
-//绘制情感的circle
-function drawEmotionSvg(poetry) {
+//绘制情感的circle（useBlend 仅在详情面板的大星星上开启 mix-blend；
+// 星空里 2400+ 颗小星若都用 mix-blend:screen 会禁用 GPU 合成、导致严重掉帧）
+function drawEmotionSvg(poetry, useBlend) {
     const colorList = getColorByEmotion(poetry)
     if (colorList.length >= 1) {
         var circle1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         circle1.setAttribute('d', "M49.2588 79.7256C69.6933 79.7256 86.2588 63.1601 86.2588 42.7256C86.2588 22.2911 69.6933 5.72559 49.2588 5.72559C28.8243 5.72559 12.2588 22.2911 12.2588 42.7256C12.2588 63.1601 28.8243 79.7256 49.2588 79.7256Z");
         circle1.setAttribute('fill', colorList[0]);
-        circle1.style.mixBlendMode = 'screen';
+        if (useBlend) circle1.style.mixBlendMode = 'screen';
         circle1.setAttribute('opacity', '0.5');
         encodeStarElementList.push(circle1)
     }
@@ -115,7 +116,7 @@ function drawEmotionSvg(poetry) {
         var circle2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         circle2.setAttribute('d', "M76.7588 96.7256C90.2898 96.7256 101.259 85.7566 101.259 72.2256C101.259 58.6946 90.2898 47.7256 76.7588 47.7256C63.2278 47.7256 52.2588 58.6946 52.2588 72.2256C52.2588 85.7566 63.2278 96.7256 76.7588 96.7256Z");
         circle2.setAttribute('fill', colorList[1]);
-        circle2.style.mixBlendMode = 'screen';
+        if (useBlend) circle2.style.mixBlendMode = 'screen';
         circle2.setAttribute('opacity', '0.6');
         encodeStarElementList.push(circle2)
     }
@@ -123,7 +124,7 @@ function drawEmotionSvg(poetry) {
         var circle3 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         circle3.setAttribute('d', "M93.2588 56.7256C103.752 56.7256 112.259 48.219 112.259 37.7256C112.259 27.2322 103.752 18.7256 93.2588 18.7256C82.7654 18.7256 74.2588 27.2322 74.2588 37.7256C74.2588 48.219 82.7654 56.7256 93.2588 56.7256Z");
         circle3.setAttribute('fill', colorList[2]);
-        circle3.style.mixBlendMode = 'screen';
+        if (useBlend) circle3.style.mixBlendMode = 'screen';
         circle3.setAttribute('opacity', '0.6');
         encodeStarElementList.push(circle3)
     }
@@ -458,76 +459,73 @@ inputElement.addEventListener('keypress', function (event) {
 //监听关闭右侧panel的按钮
 document.getElementById('close-btn').addEventListener('click', closePoetryPanel);
 
-//获取星星出现的位置
-function getRandomPosition() {
-    const mainElement = document.getElementById("sky-canvas");
-    const mainRect = mainElement.getBoundingClientRect();
-    console.log(mainRect)
+//获取星星出现的位置（传入已缓存的画布矩形，避免每颗星都触发强制重排）
+function getRandomPosition(mainRect) {
     const x = mainRect.left + Math.random() * (mainRect.width - 50);
     const y = Math.random() * (mainRect.height - 50);
     return { x, y };
 }
 
 
-async function createStars(starList) {
-    const existingStars = document.querySelectorAll(".star");
+function createStars(starList) {
+    const skyCanvas = document.getElementById("sky-canvas");
+    const existingStars = skyCanvas.querySelectorAll(".star");
     existingStars.forEach((star) => star.remove());
     showLoading()
-    const promises = starList.map(async (poetry) => {
-        return new Promise((resolve) => {
-            const star = document.createElement("div");
-            star.className = "star";
-            const { x, y } = getRandomPosition();
-            star.style.left = `${x}px`;
-            star.style.top = `${y}px`;
 
-            const svg = getSimpleEncodeSvg(poetry)
-            svg.classList.add("star-animation");
-            svg.classList.add("encode-star");
+    // 画布尺寸只读取一次。原先每颗星都 getBoundingClientRect + console.log(对象) +
+    // void offsetWidth（强制同步重排），并逐个 append 到实时 DOM——2385 颗星会造成
+    // 上千次强制重排和上千条对象日志，这就是进页面直接卡死的根因。
+    const mainRect = skyCanvas.getBoundingClientRect();
+    const fragment = document.createDocumentFragment();
 
+    starList.forEach((poetry) => {
+        const star = document.createElement("div");
+        star.className = "star";
+        const { x, y } = getRandomPosition(mainRect);
+        star.style.left = `${x}px`;
+        star.style.top = `${y}px`;
 
-            const animationDuration = Math.random() * 5 + 2;
-            const animationDelay = Math.random();
-            svg.style.animationDuration = `${animationDuration}s`;
-            svg.style.animationDelay = `-${animationDelay}s`;
+        const svg = getSimpleEncodeSvg(poetry)
+        svg.classList.add("star-animation");
+        svg.classList.add("encode-star");
 
-            star.addEventListener('click', function () {
-                updatePanelInfo(poetry);
-                drawEncodeStar(poetry);
-                showPoetryPanel();
-                highlightStar(star)
-            });
+        const animationDuration = Math.random() * 5 + 2;
+        const animationDelay = Math.random();
+        svg.style.animationDuration = `${animationDuration}s`;
+        svg.style.animationDelay = `-${animationDelay}s`;
+        svg.style.opacity = 1;
 
-            const infoBox = document.createElement("div");
-            infoBox.className = "info-box";
-            infoBox.innerHTML = `<p>${poetry.title}</p>`;
-            star.appendChild(infoBox);
-            star.appendChild(svg);
+        const sentenceNum = poetry.sentenceNum;
+        let starSize;
+        if (sentenceNum >= 0 && sentenceNum <= 4) {
+            starSize = 10;
+        } else if (sentenceNum > 4 && sentenceNum <= 8) {
+            starSize = 20;
+        } else {
+            starSize = 30;
+        }
+        svg.style.width = `${starSize}px`;
+        svg.style.height = `${starSize}px`;
 
-            // 添加到页面
-            document.getElementById("sky-canvas").appendChild(star);
-
-            // 动画最后的效果
-            void star.offsetWidth;
-            svg.style.opacity = 1;
-
-            const sentenceNum = poetry.sentenceNum;
-            let starSize;
-            if (sentenceNum >= 0 && sentenceNum <= 4) {
-                starSize = 10;
-            } else if (sentenceNum > 4 && sentenceNum <= 8) {
-                starSize = 20;
-            } else {
-                starSize = 30;
-            }
-            svg.style.width = `${starSize}px`;
-            svg.style.height = `${starSize}px`;
-
-            resolve();
+        star.addEventListener('click', function () {
+            updatePanelInfo(poetry);
+            drawEncodeStar(poetry);
+            showPoetryPanel();
+            highlightStar(star)
         });
+
+        const infoBox = document.createElement("div");
+        infoBox.className = "info-box";
+        infoBox.innerHTML = `<p>${poetry.title}</p>`;
+        star.appendChild(infoBox);
+        star.appendChild(svg);
+
+        fragment.appendChild(star);
     });
-    // 等待所有的 Promise 完成
-    await Promise.all(promises);
+
+    // 一次性插入，只触发一次重排
+    skyCanvas.appendChild(fragment);
     closeLoading()
 }
 function highlightStar(star) {
