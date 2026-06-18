@@ -80,9 +80,9 @@ function drawCenterPieChart() {
                         shadowColor: 'rgba(255, 210, 122, 0.6)'
                     },
                     label: {
-                        color: '#fff',
-                        fontSize: 15,
-                        fontWeight: 'bold'
+                        color: '#0A1A33',
+                        fontSize: 16,
+                        fontFamily: 'SongTi-regular'
                     }
                 },
                 // 四个切片与各自连线指向的环形图同色系（紫=代语 金=元素 蓝=原型意象 青=主题）
@@ -95,17 +95,14 @@ function drawCenterPieChart() {
                     shadowColor: 'rgba(123, 160, 255, 0.3)'
                 },
                 label: {
-                    color: "#fff",
-                    fontSize: 13,
-                    fontWeight: 'bold',
+                    color: "#0A1A33",
+                    fontSize: 14,
                     fontFamily: 'SongTi-regular',
-                    position: 'inside',
-                    textBorderColor: 'rgba(10, 26, 51, 0.85)',
-                    textBorderWidth: 3
+                    position: 'inside'
                 },
                 select: {
                     label: {
-                        color: "#fff",
+                        color: "#0A1A33",
                         fontSize: 16,
                         fontFamily: 'SongTi-regular',
 
@@ -180,20 +177,20 @@ function drawSidePieChart(chartName) {
     var dom;
     if (chartName == '星为主题') {
         dom = document.getElementById('Side-Pie-Chart1');
-        dom.style.top = '287px';
-        dom.style.left = '270px';
+        dom.style.top = '255px';
+        dom.style.left = '238px';
     } else if (chartName == '星为元素') {
         dom = document.getElementById('Side-Pie-Chart2');
-        dom.style.top = '166px';
-        dom.style.left = '995px';
+        dom.style.top = '134px';
+        dom.style.left = '963px';
     } else if (chartName == '星为代语') {
         dom = document.getElementById('Side-Pie-Chart3');
-        dom.style.top = '-25px';
-        dom.style.left = '518px';
+        dom.style.top = '-57px';
+        dom.style.left = '486px';
     } else if (chartName == '星为原型意象') {
         dom = document.getElementById('Side-Pie-Chart4');
-        dom.style.top = '458px';
-        dom.style.left = '464px';
+        dom.style.top = '426px';
+        dom.style.left = '432px';
     }
     var myChart = echarts.init(dom, null, {
         renderer: 'svg',
@@ -208,8 +205,8 @@ function drawSidePieChart(chartName) {
             {
                 name: '星宿',
                 type: 'pie',
-                radius: ['60%', '90%'],
-                avoidLabelOverlap: false,
+                radius: ['35%', '55%'],
+                avoidLabelOverlap: true,
                 selectedMode: true,
                 selectedOffset: 0,
                 color: colorList[chartName],
@@ -219,12 +216,15 @@ function drawSidePieChart(chartName) {
                     borderRadius: 3
                 },
                 label: {
-                    show: false,
+                    show: true,
+                    position: 'outside',
+                    formatter: '{b}',
+                    color: '#C8F2FF',
+                    fontSize: 11,
+                    fontFamily: 'SongTi-regular',
+                    overflow: 'none'
                 },
                 emphasis: {
-                    label: {
-                        show: false,
-                    },
                     scaleSize: 6,
                     itemStyle: {
                         borderColor: '#FFD27A',
@@ -234,7 +234,12 @@ function drawSidePieChart(chartName) {
                     }
                 },
                 labelLine: {
-                    show: false
+                    show: true,
+                    length: 4,
+                    length2: 6,
+                    lineStyle: {
+                        color: '#84D3FF'
+                    }
                 },
                 data: sidePieData[chartName]
             }
