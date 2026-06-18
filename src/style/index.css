@@ -1,0 +1,749 @@
+body {
+    background-color: black;
+    color: white;
+    min-height: 100vh;
+    font-size: 16px;
+    font-family: 'SongTi-regular';
+    min-width: 1300px;
+    line-height: 1.8em;
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,
+td {
+    border: 1px solid #fff;
+    /* 设置表格边框颜色为白色 */
+    padding: 8px;
+    text-align: center;
+}
+
+
+/* 横向布局 */
+.horizontal-layout {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+}
+
+/* 纵向布局 */
+.vertical-layout {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 两侧边距 */
+.sides-margin {
+    margin: 0 25px;
+}
+
+/* 导航栏 */
+#navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    text-align: center;
+    padding: 15px;
+    display: none;
+    justify-content: center;
+    /* 将子元素左对齐和居中 */
+    align-items: center;
+    font-size: 20px;
+    z-index: 10;
+    /* 垂直居中 */
+}
+
+.menu-icon {
+    float: left;
+    margin-left: 10px;
+    /* 调整左边距 */
+}
+
+#menu-text {
+    /* margin-left: -50px; */
+    width: 350px;
+    margin-left: 49%;
+    transform: translate(-50%, 0);
+}
+
+
+section {
+    margin-top: 100px;
+}
+
+/* 侧边栏 */
+#left-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 230px;
+    height: 100%;
+    background-color: black;
+    color: white;
+    padding: 15px;
+    flex-direction: column;
+    justify-content: left;
+    font-size: 20px;
+    z-index: 10;
+    box-shadow: 5px 0 20px rgba(255, 255, 255, 0.25);
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: both;
+    display: flex;
+}
+
+.visible {
+    animation-name: slideIn;
+}
+
+.hidden {
+    animation-name: slideOut;
+}
+
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-110%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-110%);
+    }
+}
+
+
+#left-menu a {
+    margin: 10px;
+    text-align: left;
+}
+
+#left-menu img {
+    width: fit-content;
+    margin-bottom: 50px;
+}
+
+/* 推荐按钮 */
+#recommend-text{
+    position: absolute; 
+    bottom: 0; 
+    left: 100px;
+    z-index: 99;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+#left-menu div {
+    margin: 50px 10px 10px 10px;
+    text-align: left;
+    cursor: pointer;
+}
+
+/* 弹窗 */
+#reference-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 750px;
+    height: 500px;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    z-index: 9999;
+    border-radius: 20px;
+    border: 1px solid white;
+    background-color: #000;
+    color: #fff;
+}
+
+/* 背景遮罩样式 */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+}
+
+#popup-close-btn {
+    font-size: 40px;
+    cursor: pointer;
+}
+
+/* 参考文献 */
+#reference-container {
+    width: 100%;
+    text-align: left;
+}
+
+#reference-container .title {
+    font-size: 20px;
+    margin: 70px 70px 0 70px;
+}
+
+#reference-container .info {
+    font-size: 14px;
+    margin: 0 70px;
+}
+
+.dataset-btn{
+    position: absolute; 
+    bottom: 0; 
+    z-index: 99;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+.cover {
+    min-height: 700px;
+    width: 100vh;
+}
+
+/* 封面部分 */
+#cover-title-img {
+    position: absolute;
+    top: 300px;
+    left: 100px;
+    width: 50%;
+    z-index: 2;
+}
+
+
+#cover-subtitle-div {
+    font-size: 35px;
+    color: white;
+    position: absolute;
+    left: 100px;
+    top: 450px;
+    z-index: 2;
+}
+
+#cover-bg1 {
+    position: absolute;
+    top: 50px;
+    left: 100px;
+    width: 900px;
+    z-index: -1;
+}
+
+#cover-bg2 {
+    position: absolute;
+    top: -800px;
+    right: -650px;
+    width: 1600px;
+}
+
+#cover-bg3 {
+    position: absolute;
+    top: -400px;
+    right: -400px;
+    width: 800px;
+    animation: rotateAnimation 30s linear infinite;
+}
+
+#cover-bg4 {
+    position: absolute;
+    top: -450px;
+    right: -450px;
+    width: 1200px;
+    animation: rotateAnimation 30s linear infinite;
+}
+
+/* 向下探索的闪动按钮 */
+#down-wrap {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    animation: blink 4s infinite;
+}
+
+
+.page-scroll {
+    font-size: 20px;
+    text-align: center;
+    text-decoration: none;
+    /* 去除下划线 */
+    color: white;
+    /* 设置字体颜色为白色 */
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.2;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* 引入部分 */
+.intro-outer-wrap {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+#intro-wrap {
+    max-width: 620px;
+    opacity: 0;
+    -webkit-transform: scale(0.9);
+    -moz-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    -o-transform: scale(0.9);
+    transform: scale(0.9);
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+}
+
+
+#intro-wrap.visible {
+    opacity: 1;
+    -webkit-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none;
+}
+
+.intro-text {
+    margin-left: 50px;
+    margin-top: -20px;
+}
+
+/* 点点繁星，你我其名 */
+.headline-wrap {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    padding-top: 100px;
+}
+
+.headline-title {
+    font-size: 53px;
+    margin-top: -230px;
+    max-width: 600px;
+    margin-bottom: 40px;
+    font-weight: bolder;
+}
+
+.headline-icon {
+    margin-left: -580px;
+}
+
+.part-icon {
+    margin-top: 100px;
+}
+
+.part-title {
+    font-size: 24px !important;
+    margin-bottom: 50px;
+    margin-top: 15px;
+}
+
+.center-wrap {
+    margin-top: 100px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    padding-top: 100px;
+}
+
+.blue-gradient-text {
+    font-size: 20px !important;
+    font-weight: bolder !important;
+    background: linear-gradient(to bottom, #408AF8, rgb(255, 255, 255, 37%));
+    background-clip: text;
+    /* 让渐变只出现在文字上面 */
+    color: transparent;
+    /* 隐藏文字的实际颜色，以显示渐变效果 */
+    display: inline-block;
+    /* 使得渐变作用于文字的实际占用区域 */
+}
+
+
+.center-blue-gradient-text {
+    font-size: 30px !important;
+    font-weight: bolder !important;
+    background: linear-gradient(to bottom, #408AF8, rgb(255, 255, 255, 37%));
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+    font-family: 'MaShanZheng-Regular';
+
+}
+
+
+/* 连线的解释性文字 */
+#connection-explain-text {
+    width: 295px;
+    margin-top: 20px;
+    font-size: 12px;
+    height: 170px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.bottom-chart-name {
+    width: 100;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* 圆形旋转别名图 */
+#Rolling-Star-Chart {
+    width: 80%;
+    margin: 0 10%;
+    height: 450px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* 滚动图最左侧的类名 */
+.rolling-left-type-name {
+    width: 400px !important;
+    height: 400px;
+    margin: 10px 20px 0 20px;
+    color: #fff;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-family: 'MaShanZheng-Regular';
+    font-size: 30px;
+}
+
+.rolling-item-warp {
+    width: 400px;
+    height: 400px;
+    margin: 10px 20px 0 20px;
+    color: #fff;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    /* 添加过渡效果 */
+}
+
+.rolling-item {
+    color: #fff;
+    position: relative;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    animation-play-state: running;
+}
+
+.rolling-item span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    animation: rotateAnimation 5s linear infinite;
+    /* 调整持续时间和其他参数 */
+
+}
+
+@keyframes rotateAnimation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 圆形旋转别名图结束 */
+
+#wordcloud-charts-wrap {
+    margin-top: 50px;
+    width: 100%;
+}
+
+/* 居中的文字 */
+.center-text {
+    width: 600px;
+    margin-bottom: 50px;
+    font-size: 16px;
+}
+
+
+/* 二十八星宿词云图 */
+#wordcloud-charts-wrap #twenty-eight-boxes {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 10px;
+    z-index: 10;
+}
+
+#wordcloud-charts-wrap #three-boxes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    margin-bottom: 20px;
+}
+
+#wordcloud-charts-wrap #five-boxes {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 20px;
+    margin-bottom: 20px;
+}
+
+.xiu-grid-item {
+    width: 170px;
+    height: 90px;
+    background-color: black;
+    /* border:1px solid white; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row
+}
+
+.yuan-grid-item {
+    width: 300px;
+    height: 90px;
+    background-color: black;
+    /* border:1px solid white; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row
+}
+
+.xing-grid-item {
+    width: 170px;
+    height: 90px;
+    background-color: black;
+    /* border:1px solid white; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row
+}
+
+.emotion-wrap {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    width: 650px;
+    margin-top: 100px;
+}
+
+.emotion-wrap .center-icon {
+    margin-left: -60px;
+    margin-bottom: -120px;
+}
+
+
+#Center-Pie-Chart {
+    height: 300px;
+    width: 800px;
+    position: absolute;
+    top: 298px;
+    left: 748px;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+/* 结尾的诗词介绍 */
+#poem-overall-wrap {
+    width: 100%;
+    height: 2500px;
+    position: relative;
+    z-index: 10;
+}
+
+.one-poem-wrap {
+    width: 550px;
+    margin-bottom: 10px;
+}
+
+.one-poem-wrap .title {
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.one-poem-wrap .intro {
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+.one-poem-wrap .poem {
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.one-poem-wrap .poem span {
+    font-weight: bold;
+    color: #4ADDFF;
+}
+
+#poem01 {
+    left: 500px;
+    top: 300px;
+    position: absolute;
+}
+
+#poem02 {
+    left: 600px;
+    top: 850px;
+    position: absolute;
+}
+
+#poem03 {
+    left: 400px;
+    top: 1300px;
+    position: absolute;
+}
+
+#poem04 {
+    left: 650px;
+    top: 1900px;
+    position: absolute;
+}
+
+#encode-star-bg {
+    top: 300px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+}
+
+#people-bg {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+
+}
+
+/* 探索动态按钮 */
+.animated-button {
+    display: inline-block;
+    padding: 30px 30px;
+    font-size: 30px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: #000;
+    color: #fff;
+    border: 5px solid #fff;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+    animation: pulse 3s infinite;
+    z-index: 100;
+}
+
+#explore-warp {
+    height: 100vh;
+}
+
+
+#chapter04 {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../image/tail-bg.png');
+    background-size: cover;
+    background-position: center;
+}
+
+#animation-div {
+    opacity: 0;
+    -webkit-transform: scale(0.9);
+    -moz-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    -o-transform: scale(0.9);
+    transform: scale(0.9);
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+}
+
+#animation-div.visible {
+    opacity: 1;
+    -webkit-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none;
+}
+
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@font-face {
+    font-family: 'SongTi-regular';
+    src: url('../font/方正清刻本悦宋简体.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MaShanZheng-Regular';
+    src: url('../font/MaShanZheng-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

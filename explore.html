@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./src/style/explore.css" />
+    <link rel="stylesheet" href="./src/style/index.css" />
+    <link rel="icon" href="./src/image/star.png" type="image/x-icon">
+    <title>古诗词星空探索</title>
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/element-ui/2.15.9/theme-chalk/index.css" />
+
+</head>
+
+<body style="background-color: black">
+    <div id="explore-header">
+        <div>诗词星空</div>
+        <a href="index.html" id="back-button">返回</a>
+    </div>
+    <div id="explore" style="height:90vh">
+        <div class="horizontal-layout" style="position: relative;">
+            <div style="width: 350px;height: 90vh;margin-left: 28px;">
+                <div class="sidebar-above-div">
+                    <div class="sidebar-title-div">
+                        <div>选择筛选条件</div>
+                    </div>
+                    <div class="filter-option horizontal-layout">
+                        <div class="filter-label">星象</div>
+                        <select id="select-originName">
+
+
+                            <option value="全部">全部</option>
+
+                            <option value="斗宿">斗宿</option>
+                            <option value="牛宿">牛宿</option>
+                            <option value="女宿">女宿</option>
+                            <option value="虚宿">虚宿</option>
+                            <option value="危宿">危宿</option>
+                            <option value="室宿">室宿</option>
+                            <option value="壁宿">壁宿</option>
+
+                            <option value="井宿">井宿</option>
+                            <option value="鬼宿">鬼宿</option>
+                            <option value="柳宿">柳宿</option>
+                            <option value="星宿">星宿</option>
+                            <option value="张宿">张宿</option>
+                            <option value="翼宿">翼宿</option>
+                            <option value="轸宿">轸宿</option>
+
+                            <option value="奎宿">奎宿</option>
+                            <option value="娄宿">娄宿</option>
+                            <option value="胃宿">胃宿</option>
+                            <option value="昴宿">昴宿</option>
+                            <option value="毕宿">毕宿</option>
+                            <option value="觜宿">觜宿</option>
+                            <option value="参宿">参宿</option>
+
+                            <option value="角宿">角宿</option>
+                            <option value="亢宿">亢宿</option>
+                            <option value="氐宿">氐宿</option>
+                            <option value="房宿">房宿</option>
+                            <option value="心宿">心宿</option>
+                            <option value="尾宿">尾宿</option>
+                            <option value="箕宿">箕宿</option>
+
+                            <option value="紫微">紫微</option>
+                            <option value="太微">太微</option>
+                            <option value="天市">天市</option>
+
+                            <option value="金星">金星</option>
+                            <option value="木星">木星</option>
+                            <option value="水星">水星</option>
+                            <option value="火星">火星</option>
+                            <option value="土星">土星</option>
+                        </select>
+                    </div>
+                    <div class="filter-option horizontal-layout">
+                        <div class="filter-label">作者</div>
+                        <input id="input-author">
+
+
+                        </input>
+                    </div>
+                    <div class="filter-option horizontal-layout">
+                        <div class="filter-label">情感</div>
+                        <select id="select-emotion">
+                            <option value="全部">全部</option>
+                            <option value="兴奋">兴奋</option>
+                            <option value="爱意">爱意</option>
+                            <option value="悲伤">悲伤</option>
+                            <option value="迷茫">迷茫</option>
+                            <option value="愤怒">愤怒</option>
+                            <option value="焦虑">焦虑</option>
+                            <option value="思念">思念</option>
+                            <option value="闲适">闲适</option>
+                            <option value="开心">开心</option>
+                            <option value="喜爱">喜爱</option>
+                            <option value="感悟">感悟</option>
+                            <option value="向往">向往</option>
+                            <option value="赞美">赞美</option>
+                            <option value="中性">中性</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-option horizontal-layout">
+                        <div class="filter-label">入诗手法</div>
+                        <select id="select-method">
+                            <option value="全部">全部</option>
+                            <option value="星为主题">星为主题</option>
+                            <option value="星为元素">星为元素</option>
+                            <option value="星为原型意象">星为原型意象</option>
+                            <option value="星为代语">星为代语</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-option horizontal-layout">
+                        <div class="filter-label">题材</div>
+                        <select id="select-theme">
+                            <option value="全部">全部</option>
+                            <option value="山水田园">山水田园</option>
+                            <option value="边塞军旅">边塞军旅</option>
+                            <option value="咏史怀古">咏史怀古</option>
+                            <option value="咏物言志">咏物言志</option>
+                            <option value="送别怀人">送别怀人</option>
+                            <option value="羁旅思乡">羁旅思乡</option>
+                            <option value="爱情闺怨">爱情闺怨</option>
+                            <option value="感怀诗">感怀诗</option>
+                            <option value="哲理诗">哲理诗</option>
+                            <option value="其他">其他</option>
+                        </select>
+                    </div>
+                    <div class="horizontal-layout">
+                        <div id="reset-btn" style="cursor: pointer;">重置</div>
+                    </div>
+                </div>
+                <div class="sidebar-below-div">
+                    <div class="sidebar-title-div2">
+                        <div>图例</div>
+                    </div>
+                    <img id="legend01" src="./src/svg/encode-stars/legend1.svg" style="margin-top: 5px;height:6vh"
+                        alt="legend" />
+                    <div style="height: 25vh;  overflow-y: scroll">
+                        <img id="legend02" src="./src/svg/encode-stars/legend2.svg" alt="legend" />
+                    </div>
+                </div>
+            </div>
+            <div id="sky-canvas">
+                <div id="loading-container">
+                    <div class="loading-spinner"></div>
+                    <!-- <div class="loading-text">正在加载中...</div> -->
+                </div>
+                <div id="not-fund-text" style="display: none;">未查询到符合要求的诗词</div>
+            </div>
+
+            <div id='poetry-detail-wrap' class="hide-panel">
+                <div id="close-btn" style="cursor: pointer;">×</div>
+                <div style="height:78vh;overflow: auto;min-height: 590px;">
+                    <div id="encode-star-svg" style="width: 100%;text-align: center;">
+
+                    </div>
+                    <div class="poetry-content-div">
+                        <p><strong><span id="poetry-title"></span></strong></p>
+                        <p style="font-size: small"><span id="poetry-author"></span></p>
+                        <p style="font-size: small"><span id="poetry-content"></span></p>
+                    </div>
+                    <hr />
+                    <div class="poetry-content-info-div">
+                        <p><strong>在诗中使用的别名:</strong> <span id="poetry-otherName"></span></p>
+                        <p><strong>星宿名:</strong> <span id="poetry-originName"></span></p>
+                        <p><strong>主题:</strong> <span id="poetry-theme"></span></p>
+                        <p><strong>体裁:</strong> <span id="poetry-genre"></span></p>
+                        <p><strong>情感:</strong> <span id="poetry-emotion"></span></p>
+                        <p><strong>入诗手法:</strong> <span id="poetry-method"></span></p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</body>
+<script type="module" src="./src/js/explore.js"></script>
+
+
+
+</html>
